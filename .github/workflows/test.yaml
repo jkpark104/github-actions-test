@@ -1,10 +1,9 @@
 name: Set CRC32 Value to Variable
 
 on:
-  workflow_dispatch:
   push:
     branches:
-      - "*"
+      - feature/*
 env:
   REF_NAME_HASH: ""
 
