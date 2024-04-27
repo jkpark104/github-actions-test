@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - "*"
+env:
+  REF_NAME_HASH: ""
+
 jobs:
   set-env-hash:
     runs-on: ubuntu-latest
@@ -11,8 +14,8 @@ jobs:
       - name: Generate hash and set as env
         run: |
           REF_NAME_HASH=$(echo -n '${{ github.ref_name }}' | sha256sum | cut -c1-6)
-          echo "REF_NAME_HASH=${REF_NAME_HASH}" >> $GITHUB_ENV
+          echo "REF_NAME_HASH=$REF_NAME_HASH" >> $GITHUB_ENV
 
       - name: Use the Environment Variable
         run: |
-          echo "The short hash is $REF_NAME_HASH"
+          echo "${{ env.REF_NAME_HASH}}"
