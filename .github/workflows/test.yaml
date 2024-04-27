@@ -1,10 +1,9 @@
 name: Set CRC32 Value to Variable
 
 on:
-  workflow_dispatch:
   push:
     branches:
-      - "*"
+      - feature/*
 env:
   REF_NAME_HASH: ""
 
@@ -14,7 +13,7 @@ jobs:
     steps:
       - name: Generate hash and set as env
         run: |
-          REF_NAME_HASH=$(echo -n '${{ github.ref_name }}' | sha256sum | cut -c1-6)
+          REF_NAME_HASH=$(echo -n '${{ github.ref_name }}' | sha256sum | cut -c1-8)
           echo "REF_NAME_HASH=$REF_NAME_HASH" >> $GITHUB_ENV
 
       - name: Use the Environment Variable
