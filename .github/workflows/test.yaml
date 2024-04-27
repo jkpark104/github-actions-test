@@ -7,26 +7,10 @@ on:
 
 env:
   CRC32_VALUE: ""
-
 jobs:
-  set_crc32_value:
+  hash-ref-name:
     runs-on: ubuntu-latest
     steps:
-      - name: Set CRC32 Value
-        id: crc32
+      - name: Hash the github.ref_name
         run: |
-          CRC32_VALUE=$(crc32 <(echo "${{ github.ref_name }}") | cut -c 1-4)
-          echo "CRC32_VALUE=$CRC32_VALUE" >> $GITHUB_ENV
-          echo "::set-output name=crc32_value::$CRC32_VALUE"
-
-      - name: Use CRC32 Value
-        run: |
-          echo "CRC32 Value is ${{ steps.crc32.outputs.crc32_value }}"
-
-      - name: echo CRC32 Value
-        run: |
-          echo "CRC32 Value is $CRC32_VALUE"
-
-      - name: echo CRC32 Value from env
-        run: |
-          echo "CRC32 Value is ${{ env.CRC32_VALUE }}"
+          echo "The hash of the ref name is $(echo -n '${{ github.ref_name }}' | sha256sum | awk '{print $1}')"
