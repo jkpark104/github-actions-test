@@ -4,13 +4,15 @@ on:
   push:
     branches:
       - "*"
-
-env:
-  CRC32_VALUE: ""
 jobs:
-  hash-ref-name:
+  set-env-hash:
     runs-on: ubuntu-latest
     steps:
-      - name: Hash the github.ref_name
+      - name: Generate hash and set as env
         run: |
-          echo "The hash of the ref name is $(echo -n '${{ github.ref_name }}' | sha256sum | awk '{print $1}')"
+          REF_NAME_HASH=$(echo -n '${{ github.ref_name }}' | sha256sum | cut -c1-6)
+          echo "REF_NAME_HASH=${REF_NAME_HASH}" >> $GITHUB_ENV
+
+      - name: Use the Environment Variable
+        run: |
+          echo "The short hash is $REF_NAME_HASH"
