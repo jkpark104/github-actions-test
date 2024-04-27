@@ -17,5 +17,6 @@ jobs:
           echo "REF_NAME_HASH=$REF_NAME_HASH" >> $GITHUB_ENV
 
       - name: Use the Environment Variable
-        run: |
-          echo "${{ env.REF_NAME_HASH}}"
+        uses: ./.github/actions/storybook
+        with:
+          ref_name_hash: ${{ env.REF_NAME_HASH }}

@@ -1,0 +1,13 @@
+name: "Echo REF_NAME_HASH"
+description: "This action prints the value of REF_NAME_HASH."
+inputs:
+  ref_name_hash:
+    description: "The hash of the ref name."
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Print REF_NAME_HASH
+      shell: bash
+      run: echo "REF_NAME_HASH is ${{ inputs.ref_name_hash }}"
