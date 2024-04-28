@@ -22,6 +22,7 @@ runs:
       #   path: .github/actions
 
     - name: Generate hash and set as env
+      shell: bash
       run: |
         HASHED_BRANCH_NAME=$(echo -n '${{ github.ref_name }}' | sha256sum | cut -c1-8)
         echo "HASHED_BRANCH_NAME=$HASHED_BRANCH_NAME" >> $GITHUB_ENV

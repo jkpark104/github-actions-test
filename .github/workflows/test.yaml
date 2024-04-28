@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - feature/*
-env:
-  REF_NAME_HASH: ""
 
 jobs:
   set-env-hash:
