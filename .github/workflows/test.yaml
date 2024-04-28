@@ -1,21 +1,20 @@
 name: Set CRC32 Value to Variable
 
 on:
-  push:
+  pull_request:
+    types:
+      - opened
     branches:
-      - "*"
-env:
-  REF_NAME_HASH: ""
+      - feature/*
 
 jobs:
   set-env-hash:
     runs-on: ubuntu-latest
     steps:
-      - name: Generate hash and set as env
-        run: |
-          REF_NAME_HASH=$(echo -n '${{ github.ref_name }}' | sha256sum | cut -c1-6)
-          echo "REF_NAME_HASH=$REF_NAME_HASH" >> $GITHUB_ENV
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Use the Environment Variable
-        run: |
-          echo "${{ env.REF_NAME_HASH}}"
+        uses: ./.github/actions/storybook
+        with:
+          app-name: app-main
