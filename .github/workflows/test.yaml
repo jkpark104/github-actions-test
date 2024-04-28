@@ -12,19 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Generate hash and set as env
-        run: |
-          REF_NAME_HASH=$(echo -n '${{ github.ref_name }}' | sha256sum | cut -c1-8)
-          echo "REF_NAME_HASH=$REF_NAME_HASH" >> $GITHUB_ENV
+        uses: actions/checkout@v3
 
       - name: Use the Environment Variable
         uses: ./.github/actions/storybook
         with:
-          ref_name_hash: ${{ env.REF_NAME_HASH }}
-
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version-file: .nvmrc
+          app-name: app-main
