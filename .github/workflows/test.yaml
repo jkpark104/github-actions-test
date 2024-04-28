@@ -25,6 +25,6 @@ jobs:
           ref_name_hash: ${{ env.REF_NAME_HASH }}
 
       - name: Use Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
-          node-version: .nvmrc
+          node-version-file: .nvmrc
