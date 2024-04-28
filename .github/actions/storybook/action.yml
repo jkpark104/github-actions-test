@@ -21,6 +21,9 @@ runs:
       #   token: ${{ secrets.SOCAR_TECH_GITHUB_TOKEN }}
       #   path: .github/actions
 
+    - name: Echo Red Text
+      run: echo -e "\033[31m체크 아웃 완료\033[0m"
+
     - name: 브랜치 이름 해싱 후 환경 변수에 저장
       shell: bash
       run: |
@@ -61,8 +64,8 @@ runs:
     #     aws-cloudfront-distribution-id: ${{ env.AWS_CLOUDFRONT_DISTRIBUTION_ID }}
     #     build-tag: ${{ inputs.app-name }}/${{ env.HASHED_BRANCH_NAME }}
 
-    - name: PR에 Storybook URL 추가
-      uses: thollander/actions-comment-pull-request@v2
-      with:
-        message: |
-          Storybook URL : https://monorepo-storybook.socar.me/${{ inputs.app-name }}/${{ env.HASHED_BRANCH_NAME }}/index.html
+    # - name: PR에 Storybook URL 추가
+    #   uses: thollander/actions-comment-pull-request@v2
+    #   with:
+    #     message: |
+    #       Storybook URL : https://monorepo-storybook.socar.me/${{ inputs.app-name }}/${{ env.HASHED_BRANCH_NAME }}/index.html
