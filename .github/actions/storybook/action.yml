@@ -21,7 +21,7 @@ runs:
       #   token: ${{ secrets.SOCAR_TECH_GITHUB_TOKEN }}
       #   path: .github/actions
 
-    - name: Generate hash and set as env
+    - name: 브랜치 이름 해싱 후 환경 변수에 저장
       shell: bash
       run: |
         HASHED_BRANCH_NAME=$(echo -n '${{ github.ref_name }}' | sha256sum | cut -c1-8)
