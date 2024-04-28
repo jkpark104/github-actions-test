@@ -22,6 +22,7 @@ runs:
       #   path: .github/actions
 
     - name: Echo Red Text
+      shell: bash
       run: echo -e "\033[31m체크 아웃 완료\033[0m"
 
     - name: 브랜치 이름 해싱 후 환경 변수에 저장
