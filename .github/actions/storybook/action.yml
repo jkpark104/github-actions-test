@@ -21,10 +21,14 @@ runs:
       #   token: ${{ secrets.SOCAR_TECH_GITHUB_TOKEN }}
       #   path: .github/actions
 
-    - name: Generate hash and set as env
+    - name: Echo Red Text
+      shell: bash
+      run: echo -e "\033[31m체크 아웃 완료\033[0m"
+
+    - name: 브랜치 이름 해싱 후 환경 변수에 저장
       shell: bash
       run: |
-        HASHED_BRANCH_NAME=$(echo -n '${{ github.ref_name }}' | sha256sum | cut -c1-8)
+        HASHED_BRANCH_NAME=$(echo -n '${{ github.head_ref }}' | sha256sum | cut -c1-8)
         echo "HASHED_BRANCH_NAME=$HASHED_BRANCH_NAME" >> $GITHUB_ENV
 
     - name: Node.js 셋업
@@ -61,8 +65,8 @@ runs:
     #     aws-cloudfront-distribution-id: ${{ env.AWS_CLOUDFRONT_DISTRIBUTION_ID }}
     #     build-tag: ${{ inputs.app-name }}/${{ env.HASHED_BRANCH_NAME }}
 
-    - name: PR에 Storybook URL 추가
-      uses: thollander/actions-comment-pull-request@v2
-      with:
-        message: |
-          Storybook URL : https://monorepo-storybook.socar.me/${{ inputs.app-name }}/${{ env.HASHED_BRANCH_NAME }}/index.html
+    # - name: PR에 Storybook URL 추가
+    #   uses: thollander/actions-comment-pull-request@v2
+    #   with:
+    #     message: |
+    #       Storybook URL : https://monorepo-storybook.socar.me/${{ inputs.app-name }}/${{ env.HASHED_BRANCH_NAME }}/index.html
