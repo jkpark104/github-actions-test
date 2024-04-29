@@ -28,7 +28,7 @@ runs:
     - name: 브랜치 이름 해싱 후 환경 변수에 저장
       shell: bash
       run: |
-        HASHED_BRANCH_NAME=$(echo -n '${{ github.ref_name }}' | sha256sum | cut -c1-8)
+        HASHED_BRANCH_NAME=$(echo -n '${{ github.head_ref }}' | sha256sum | cut -c1-8)
         echo "HASHED_BRANCH_NAME=$HASHED_BRANCH_NAME" >> $GITHUB_ENV
 
     - name: Node.js 셋업
